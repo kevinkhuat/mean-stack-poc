@@ -1,0 +1,38 @@
+mixin welcom
+  p Welcome
+
+mixin outputRating(rating)
+  - for (var i = 1; i <= rating; i++)
+    span.glyphicon.glyphicon-star
+  - for (i = rating; i < 5; i++)
+    span.glyphicon.glyphicon-star-empty
+extends layout
+
+block content
+  #banner.page-header
+    .row
+      .col-lg-6
+        h1
+          | pageHeader.title
+          small &nbsp;#{pageHeader.strapline}
+  .row
+    .col-xs-12.col-sm-8
+      .row.list-group
+        each location in locations
+          .col-xs-12.list-group-item
+            h4
+              a(href='/location') location.name
+              small &nbsp;
+                span.glyphicon.glyphicon-star
+                span.glyphicon.glyphicon-star
+                span.glyphicon.glyphicon-star
+                span.glyphicon.glyphicon-star-empty
+                span.glyphicon.glyphicon-star-empty
+              span.badge.pull-right.badge-default= location.distance
+            p.address= location.address
+            p
+              each facility in location.facilities
+                span.label.label-warning= facility
+                | &nbsp;
+    .col-xs-12.col-sm-4
+      p.lead
